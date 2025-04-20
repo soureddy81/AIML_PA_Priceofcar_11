@@ -1,2 +1,219 @@
-# AIML_PA_Priceofcar_11
-What drives the price of car
+# What Drives the Price of a Car?
+A comprehensive analysis of the factors influencing the price of a car.
+
+![DealerImage](images/kurt.jpeg)
+
+## Overview
+
+This project explores a dataset from Kaggle containing information on 426,880 used cars, reduced from the original 3 million records for faster processing. The objective is to identify the key factors that influence car prices and provide actionable insights for used car dealerships to optimize their inventory and sales strategies.
+
+---
+
+# Methodology Used 
+
+The CRISP-DM (CRoss Industry Standard Process for Data Mining) methodology was employed to ensure a structured and repeatable approach to data analysis. This framework is industry-agnostic and technology-independent, making it ideal for large-scale data mining projects. It helps reduce costs, improve reliability, and accelerate project timelines.
+
+![DealerImage](images/crisp.png)
+
+---
+
+## Business Understanding
+
+For a used car dealer, understanding the factors that make a car more or less expensive is critical. By analyzing 426,880 used car sales records, this project aims to guide dealerships in making data-driven decisions to enhance their inventory and sales strategies.
+
+---
+
+## Data Understanding
+
+The dataset contains detailed information about used car sales. Below is an overview of the data, generated using the `ProfileReport` library from `ydata_profiling`.
+
+![DealerImage](images/data_profiling.png)
+
+### Missing Data Analysis
+
+A heatmap visualization highlights the distribution of missing values in the dataset.
+
+![DealerImage](images/missed_data_heatmap.png)
+
+#### Summary of Missing Data and Actions Taken:
+
+| Column         | Missing % | Action Taken                                                                 |
+|----------------|-----------|------------------------------------------------------------------------------|
+| `id`           | 0%        | Removed (not useful for regression).                                         |
+| `region`       | 0%        | Retained.                                                                   |
+| `price`        | 7.7%      | Removed records with zero values.                                            |
+| `year`         | 0.3%      | Filled with the most common value.                                           |
+| `manufacturer` | 4.1%      | Filled with "Other" (categorical column).                                    |
+| `model`        | 1.2%      | Filled with "Other" (categorical column).                                    |
+| `condition`    | 40.8%     | Filled with the most common value.                                           |
+| `cylinders`    | 41.6%     | Cleaned and filled with the most common value.                               |
+| `fuel`         | 0.7%      | Filled with "Other" (categorical column).                                    |
+| `odometer`     | 1%        | Filled with the mean value.                                                  |
+| `title_status` | 1.9%      | Filled with the most common value.                                           |
+| `transmission` | 0.6%      | Filled with "Other" (categorical column).                                    |
+| `VIN`          | 37.7%     | Removed (high percentage of missing values).                                 |
+| `drive`        | 30.6%     | Removed (high percentage of missing values).                                 |
+| `size`         | 71.8%     | Removed (high percentage of missing values).                                 |
+| `type`         | 21.8%     | Filled with "Other" (categorical column).                                    |
+| `paint_color`  | 30.5%     | Removed (high percentage of missing values).                                 |
+| `state`        | 0%        | Retained.                                                                   |
+
+---
+
+## Data Preparation
+ 
+Handled the missing data, Data cleaning, identify the outliers and post cleaning EDA using `ProfileReport` library from `ydata_profiling`.
+
+
+### Handling Missing Values
+
+The following actions were taken to address missing values:
+
+- Removed columns with high percentages of missing data.
+- Filled categorical columns with "Other" or the most common value.
+- Filled numerical columns with the mean or mode as appropriate.
+
+### Data Cleaning Steps
+
+- Removed records with `price = 0`.
+- Dropped irrelevant columns (`id`, `VIN`, `region`, `size`, `paint_color`, `drive`).
+- Applied transformations to clean and standardize data (e.g., removing "cylinders" text, replacing invalid values).
+
+### Post-Cleaning Results
+
+![DealerImage](images/data_cleaned.png)
+
+A heatmap confirms that missing values have been addressed.
+
+![DealerImage](images/cleaned_heatmap.png)
+
+---
+
+### Identifying Outliers
+
+Outliers in the `price` column were identified using the IQR method. The safe range for prices was determined to be between $100 and $70,000.
+
+![DealerImage](images/price_distribution.png)
+
+---
+
+## Modeling
+
+Multiple regression models were tested to identify the best fit for the data:
+
+1. Simple Linear Regression
+2. Linear Regression with Polynomial Features (GridSearchCV)
+3. Ridge Regression with Polynomial Features (GridSearchCV)
+4. Lasso Regression with Polynomial Features (GridSearchCV)
+5. Linear Regression with Sequential Feature Selector (GridSearchCV)
+
+![DealerImage](images/regressions_results.png)
+
+### Best Model
+
+The `Linear Regression with Polynomial Features` model was identified as the best fit, based on its low Mean Squared Error (MSE) and high R² score.
+
+---
+
+## Evaluation
+
+### Mean Squared Error (MSE)
+
+The `Linear Regression with Polynomial Features` model demonstrated the lowest MSE.
+
+![DealerImage](images/regression_results_comparison.png)
+
+### R² Score
+
+The model also achieved the highest R² score, confirming its accuracy.
+
+![DealerImage](images/r2_comparisson.png)
+
+### Feature Importance
+
+Using Permutation Importance, the most impactful features were identified:
+
+![DealerImage](images/permutation_importance.png)
+
+Key features include:
+- `Year`: Newer cars or vintage models are more expensive.
+- `Odometer`: Higher mileage reduces car value.
+- `Cylinders`: Indicates engine size and performance.
+
+---
+
+## Data Correlation
+
+Correlation analysis reveals strong relationships between price and key features:
+
+![DealerImage](images/correlation.png)
+
+---
+
+## Deployment
+
+### Feature Categorization
+
+#### Year Categories:
+- `Vintage`: 1919–1930
+- `Antique`: Pre-1975
+- `Classic`: Pre-2000
+- `Modern`: 2000–2017
+- `New Model`: 2017–Present
+
+#### Odometer Categories:
+- `New`: <15K miles
+- `Low`: 15K–40K miles
+- `Medium`: 40K–70K miles
+- `High`: >70K miles
+
+### Classified Data
+
+![DealerImage](images/data_classification.png)
+
+---
+
+### Insights from Visualizations
+
+#### Prices by Year Category vs Fuel Type
+
+![DealerImage](images/year_category_vs_fuel.png)
+
+- Gas vehicles dominate in value.
+- Hybrid cars show a gradual increase in adoption.
+
+#### Total Price by Manufacture Year
+
+![DealerImage](images/total_prices_by_year.png)
+
+- Cars manufactured in 2018 are the most valuable.
+
+#### Top Models by Year and Odometer
+
+![DealerImage](images/topmodel_prices_by_year.png)
+
+- Ford F-150 and Chevrolet Silverado are the most sought-after models.
+
+![DealerImage](images/topmodel_by_odometer.png)
+
+- Consumers prefer vehicles with medium to high mileage.
+
+---
+
+## Findings
+
+1. Cars manufactured 4 years ago are most preferred.
+2. Ford F-150 and Chevrolet Silverado are top-performing models.
+3. Gas-powered vehicles dominate the market.
+4. High-mileage vehicles are popular in the $6,000–$20,000 price range.
+
+---
+
+## Recommendations
+
+1. Focus on acquiring Ford F-150 and Chevrolet Silverado models.
+2. Maintain an inventory of vehicles with medium to high mileage.
+3. Monitor trends in hybrid and electric vehicles for future opportunities.
+4. Improve data quality to enhance model performance.
+5. Test the model with new data entries for validation.
+
