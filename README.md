@@ -1,7 +1,7 @@
 # What Drives the Price of a Car?
 A comprehensive analysis of the factors influencing the price of a car.
 
-![DealerImage](images/kurt.jpeg)
+![Image](images/kurt.jpeg)
 
 ## Overview
 
@@ -13,7 +13,7 @@ This project explores a dataset from Kaggle containing information on 426,880 us
 
 The CRISP-DM (CRoss Industry Standard Process for Data Mining) methodology was employed to ensure a structured and repeatable approach to data analysis. This framework is industry-agnostic and technology-independent, making it ideal for large-scale data mining projects. It helps reduce costs, improve reliability, and accelerate project timelines.
 
-![DealerImage](images/crisp.png)
+![Image](images/crisp.png)
 
 ---
 
@@ -27,13 +27,13 @@ For a used car dealer, understanding the factors that make a car more or less ex
 
 The dataset contains detailed information about used car sales. Below is an overview of the data, generated using the `ProfileReport` library from `ydata_profiling`.
 
-![DealerImage](images/data_profiling.png)
+![Image](images/data_profiling.png)
 
 ### Missing Data Analysis
 
 A heatmap visualization highlights the distribution of missing values in the dataset.
 
-![DealerImage](images/missed_data_heatmap.png)
+![Image](images/missed_data_heatmap.png)
 
 #### Summary of Missing Data and Actions Taken:
 
@@ -81,11 +81,11 @@ The following actions were taken to address missing values:
 
 ### Post-Cleaning Results
 
-![DealerImage](images/data_cleaned.png)
+![Image](images/data_cleaned.png)
 
 A heatmap confirms that missing values have been addressed.
 
-![DealerImage](images/cleaned_heatmap.png)
+![Image](images/cleaned_heatmap.png)
 
 ---
 
@@ -93,7 +93,7 @@ A heatmap confirms that missing values have been addressed.
 
 Outliers in the `price` column were identified using the IQR method. The safe range for prices was determined to be between $100 and $70,000.
 
-![DealerImage](images/price_distribution.png)
+![Image](images/price_distribution.png)
 
 ---
 
@@ -107,13 +107,17 @@ Multiple regression models were tested to identify the best fit for the data:
 4. Lasso Regression with Polynomial Features (GridSearchCV)
 5. Linear Regression with Sequential Feature Selector (GridSearchCV)
 
-![DealerImage](images/regressions_results.png)
+![Image](images/regressions_results.png)
+
+The number of car sales, by amount and price. 
+![Image](images/car_sales_by_year_and_price.png)
+
 
 ### Best Model
 
 The `Linear Regression with Polynomial Features` model was identified as the best fit, based on its low Mean Squared Error (MSE) and high R² score.
 
----
+
 
 ## Evaluation
 
@@ -121,19 +125,19 @@ The `Linear Regression with Polynomial Features` model was identified as the bes
 
 The `Linear Regression with Polynomial Features` model demonstrated the lowest MSE.
 
-![DealerImage](images/regression_results_comparison.png)
+![Image](images/regression_results_comparison.png)
 
 ### R² Score
 
 The model also achieved the highest R² score, confirming its accuracy.
 
-![DealerImage](images/r2_comparisson.png)
+![Image](images/r2_comparisson.png)
 
 ### Feature Importance
 
 Using Permutation Importance, the most impactful features were identified:
 
-![DealerImage](images/permutation_importance.png)
+![Image](images/permutation_importance.png)
 
 Key features include:
 - `Year`: Newer cars or vintage models are more expensive.
@@ -146,9 +150,9 @@ Key features include:
 
 Correlation analysis reveals strong relationships between price and key features:
 
-![DealerImage](images/correlation.png)
+![Image](images/correlation.png)
 
----
+
 
 ## Deployment
 
@@ -169,7 +173,7 @@ Correlation analysis reveals strong relationships between price and key features
 
 ### Classified Data
 
-![DealerImage](images/data_classification.png)
+![Image](images/data_classification.png)
 
 ---
 
@@ -177,33 +181,45 @@ Correlation analysis reveals strong relationships between price and key features
 
 #### Prices by Year Category vs Fuel Type
 
-![DealerImage](images/year_category_vs_fuel.png)
+![Image](images/year_category_vs_fuel.png)
 
 - Gas vehicles dominate in value.
 - Hybrid cars show a gradual increase in adoption.
 
-#### Total Price by Manufacture Year
+#### Total Price by Manufacturing Year
 
-![DealerImage](images/total_prices_by_year.png)
+![Image](images/total_prices_by_year.png)
 
 - Cars manufactured in 2018 are the most valuable.
 
 #### Top Models by Year and Odometer
 
-![DealerImage](images/topmodel_prices_by_year.png)
+![Image](images/topmodel_prices_by_year.png)
 
 - Ford F-150 and Chevrolet Silverado are the most sought-after models.
 
-![DealerImage](images/topmodel_by_odometer.png)
+![Image](images/topmodel_by_odometer.png)
 
 - Consumers prefer vehicles with medium to high mileage.
+
+### Evaluating 2018 (Most priced cars) and the distribution of top models & Odometer
+
+![Image](images/topmodel_by_odometer_2018.png)
+
+When going deeper into the data for vehicles manufactured in 2018, I found the Ford F-150 as one of the best options for customers. They are looking for Ford F-150 with Low and Medium mileage mainly.
+
+#### Price for cars manufactured in 2018 by model
+
+![Image](images/prices_2018_bymodel.png)
+
+This graph complements the previous data as we can see here what the most priced models manufactured in 2018 are. We found the Ford F150 and Chevrolet Silverado in the top two, with the Ford F150 representing almost double the second place.
 
 ---
 
 ## Findings
 
 1. Cars manufactured 4 years ago are most preferred.
-2. Ford F-150 and Chevrolet Silverado are top-performing models.
+2. The Ford F-150 and Chevrolet Silverado are top-performing models.
 3. Gas-powered vehicles dominate the market.
 4. High-mileage vehicles are popular in the $6,000–$20,000 price range.
 
