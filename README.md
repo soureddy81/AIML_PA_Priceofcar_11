@@ -64,7 +64,10 @@ The dataset contains detailed information about used car sales. Below is an over
 ### Missing Data Analysis
 
 A heatmap visualization highlights the distribution of missing values in the dataset.
+#### BarPlot
+![Image](images/missing_value_bar_chart.png)
 
+#### HeatMap 
 ![Image](images/missed_data_heatmap.png)
 
 #### Summary of Missing Data and Actions Taken:
