@@ -18,9 +18,32 @@ This project aims to predict the price of used cars using machine learning techn
 
 ![Image](images/kurt.jpeg)
 
-## Dataset
+### Data
 
-The dataset used in this project is sourced from Kaggle and contains information on 426,880 used cars. This dataset was reduced from an original set of 3 million records to facilitate faster processing and analysis.
+The dataset used in this project is sourced from Kaggle and contains information on 426,880 used cars. This dataset was reduced from an original set of 3 million records to facilitate faster processing and analysis. 
+The GitHub cannot upload greater than 25GB, so the file was compressed & uploaded in the same data folder
+<br>[Link to vehicles Dataset](data/vehicles.csv)
+[<br>Link to vehicles Dataset zip file ](data/vehicles.csv.zip)
+
+
+### Analysis 
+
+The analysis was conducted using the Python programming language and the libraries 
+ 
+| Category             | Libraries                                                                                                                               |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Data Manipulation    | pandas, numpy                                                                                                                           |
+| Visualization        | seaborn, matplotlib, plotly.express                                                                                                     |
+| Machine Learning     | sklearn (preprocessing, compose, pipeline, model selection, linear_model, metrics, feature selection, inspection)                       |
+| Encoding             | category_encoders                                                                                                                       |
+| Text Processing      | re                                                                                                                                      |
+| EDA                  | ydata_profiling                                                                                                                         |
+
+
+The specifics of the analysis, data understanding, missing data analysis, data preparation, including the code, visualizations, comments, and observations, model comparison, and best model evaluation are available in the following Jupyter Notebook.
+
+[Link to Jupyter Notebook](/AIML_PA_prompt_II.ipynb)
+
 
 ## Methodology
 
@@ -34,7 +57,7 @@ Understanding the factors influencing used car prices is crucial for used car de
 
 ## Data Understanding
 
-The dataset contains detailed information about used car sales. Below is an overview of the data, generated using the `ProfileReport` library from `ydata_profiling`.
+The dataset contains detailed information about used car sales. Below is an overview of the data, post cleaning validation, identifying outliers,  generated using the `ProfileReport` library from `ydata_profiling`.
 
 ![Image](images/data_profiling.png)
 
